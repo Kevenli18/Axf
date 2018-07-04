@@ -1,0 +1,7 @@
+.cart dl dd{
+  color: orange;
+}
+.cart dl dt span{
+  background: url(/static/img/cart1.png) no-repeat;
+  background-size:0.513889rem;
+}
