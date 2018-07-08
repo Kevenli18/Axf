@@ -19,15 +19,20 @@ import socket
 #sk.send(b)
 
 
-childtypenames = '全部分类：0#进口水果：110#国产水果：120'
-childtypename_list = childtypenames.split('#')
-child_type_name_list = []
-for childtypename in childtypename_list:
-    child_type_name_list.append(childtypename.split('：'))
+# def del_repeat(arr):
+#     ''' 删除list里面的重复元素 '''
+#     a = set(arr)
+#     b = list(a)
+#     return b
 
-print(child_type_name_list)
+def test(parm):
+    for i in parm:
+        print(i)
 
+if __name__ == '__main__':
+    # arr = [1,2,3,1,4]
+    # print(del_repeat(arr))
 
-
-
+    parm = []
+    test(parm)
 

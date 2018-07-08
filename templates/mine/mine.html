@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{% static 'axf/mine/css/mine.css' %}">
 {% endblock %}
 
+{% block extJS %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/mine/js/mine.js' %}"></script>
+{% endblock %}
 {% block content %}
     <div id="mine">
         <div class="fixed">
@@ -143,3 +147,7 @@
     </div>
 
 {% endblock %}
+
+
+
+

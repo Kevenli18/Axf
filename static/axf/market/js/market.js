@@ -29,9 +29,15 @@ $(function () {
     $(".addShopping").click(function () {
         console.log('添加到购物车');
         var goodsid = $(this).attr("goodsid");
+        var $add = $(this);
         //$(this).prop()
-        $.getJSON("/axf/add_cart/",{"goodsid": goodsid}, function () {
-            
+        $.getJSON("/axf/add_cart/",{"goodsid": goodsid}, function (data) {
+            if (data.status == '902') {
+                 window.open('/axf/user_login/', target="_self");
+            }else if (data.status == '201'){
+                console.log(data);
+                $add.prev("span").html(data.c_goods_num)
+            }
         })
     })
 });

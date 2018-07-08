@@ -1,3 +1,6 @@
+import hashlib
+
+from django.contrib.auth.hashers import make_password, check_password
 from django.db import models
 
 # Create your models here.
@@ -113,11 +116,58 @@ class UserModel(models.Model):
     is_active = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
 
+    def set_password(self, password):
+        # md5 = hashlib.md5()
+        # md5.update(password.encode('utf-8'))
+        # password = md5.hexdigest()
+        # self.u_password = password
+        self.u_password = make_password(password=password)
+
+    def check_password(self, password):
+        # md5 = hashlib.md5()
+        # md5.update(password.encode('utf-8'))
+        # password = md5.hexdigest()
+        # return self.u_password == password
+        return check_password(password, self.u_password)
+
     class Meta:
         db_table = 'axf_user'
 
 
+class Cart(models.Model):
+    c_goods = models.ForeignKey(Goods)
+    c_user = models.ForeignKey(UserModel)
+    is_select = models.BooleanField(default=True)
+    c_goods_num = models.IntegerField(default=1)
 
+    class Meta:
+        db_table = 'axf_cart'
+
+
+class Order(models.Model):
+    o_user = models.ForeignKey(UserModel)
+    o_total_price = models.FloatField(default=0)
+    '''
+        需要建立映射
+            0代表已下单未付款
+            1已下单已付款
+            2已下单已付款
+            3.。。。。
+            
+    '''
+    o_status = models.IntegerField(default=0)
+    o_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'axf_order'
+
+
+class OrderGoods(models.Model):
+    o_order = models.ForeignKey(Order)
+    o_goods = models.ForeignKey(Goods)
+    o_goods_num = models.IntegerField(default=1)
+    class Meta:
+        db_table = 'axf_ordergoods'
 
 
 
